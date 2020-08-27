@@ -5,25 +5,29 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-class Car {
+import androidx.annotation.NonNull;
 
-    private Context mContext;
+import static androidx.core.util.Preconditions.checkNotNull;
 
-    public Car(Context context) {
-        mContext = context;
+public class Car {
+
+    private @NonNull Context mContext;
+
+    public Car(@NonNull Context context) {
+        mContext = checkNotNull(context, "Context cannot be null");
     }
 
-    boolean hasGas() {
+    public boolean hasGas() {
         Random random = new Random();
         int randomValue = random.nextInt(10);
         return randomValue % 2 == 0;
     }
 
-    void start() {
+    public void start() {
         Toast.makeText(mContext, "Start", Toast.LENGTH_SHORT).show();
     }
 
-    void warning(String message) {
+    public void warning(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 }

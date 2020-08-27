@@ -6,28 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-    private Car mCar;
+
+    private MainPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCar = new Car(this);
+        Car car = new Car(this);
+        mPresenter = new MainPresenter(car);
 
         findViewById(R.id.startEngineButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickButtonStartEngine();
+                mPresenter.onClickButtonStartEngine();
             }
         });
     }
 
-    public void onClickButtonStartEngine() {
-        if (mCar.hasGas()) {
-            mCar.start();
-        } else {
-            mCar.warning("Out of gas");
-        }
-    }
 }
