@@ -1,6 +1,8 @@
 package bfc.test.seminarunittest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import bfc.test.seminarunittest.models.Car;
+import bfc.test.seminarunittest.models.CarImpl;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Car car = new Car(this);
+        Car car = new CarImpl(this);
         mPresenter = new MainPresenter(car);
 
         findViewById(R.id.startEngineButton).setOnClickListener(new View.OnClickListener() {

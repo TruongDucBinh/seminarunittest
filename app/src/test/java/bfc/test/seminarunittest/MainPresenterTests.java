@@ -1,12 +1,11 @@
 package bfc.test.seminarunittest;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
+import bfc.test.seminarunittest.models.Car;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class MainPresenterTests {
 
@@ -15,19 +14,27 @@ public class MainPresenterTests {
 
     private MainPresenter mPresenter;
 
-    @Before
-    public void setup() {
-        // Mockito has a very convenient way to inject mocks by using the @Mock annotation. To
-        // inject the mocks in the test the initMocks method needs to be called.
-        MockitoAnnotations.initMocks(this);
-
-        mPresenter = new MainPresenter(mCar);
-    }
-
     @Test
     public void test_onClickButtonStartEngine_gasIsFull() {
         // Arrange
-        when(mCar.hasGas()).thenReturn(true);
+        mCar = new Car() {
+            @Override
+            public boolean hasGas() {
+                return true;
+            }
+
+            @Override
+            public void start() {
+                // do nothing
+            }
+
+            @Override
+            public void warning(String message) {
+                // do nothing
+            }
+        };
+        mPresenter = new MainPresenter(mCar);
+
         // Act
         mPresenter.onClickButtonStartEngine();
         // Assert
@@ -37,7 +44,23 @@ public class MainPresenterTests {
     @Test
     public void test_onClickButtonStartEngine_runOutOfGas() {
         // Arrange
-        when(mCar.hasGas()).thenReturn(false);
+        mCar = new Car() {
+            @Override
+            public boolean hasGas() {
+                return false;
+            }
+
+            @Override
+            public void start() {
+                // do nothing
+            }
+
+            @Override
+            public void warning(String message) {
+                // do nothing
+            }
+        };
+        mPresenter = new MainPresenter(mCar);
         // Act
         mPresenter.onClickButtonStartEngine();
         // Assert

@@ -1,5 +1,7 @@
 package bfc.test.seminarunittest;
 
+import bfc.test.seminarunittest.models.Car;
+
 public class MainPresenter {
     private Car mCar;
 
